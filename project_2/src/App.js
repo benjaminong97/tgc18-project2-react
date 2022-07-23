@@ -8,7 +8,7 @@ import TopBar from "./components/TopBar"
 function App() {
     return (
         <React.Fragment>
-            <TopBar/>
+            
             <Listings />
         </React.Fragment>
 

@@ -13,7 +13,11 @@ export default class Create extends React.Component {
         newShoes: {},
         newOutfitImage: "",
         newContributor: "",
-        newCaption: ""
+        newCaption: "",
+        newHeadDress: "",
+        newHairStyle: "",
+        newHeadCost : ""
+        
 
     }
 
@@ -32,7 +36,12 @@ export default class Create extends React.Component {
             "shoes": this.state.newShoes,
             "outfitImage": this.state.newOutfitImage,
             "contributor": this.state.newContributor,
-            "fashionDescription" : this.state.newCaption
+            "fashionDescription" : this.state.newCaption,
+            "head": {
+                "newHeadDress" : this.state.newHeadDress,
+                "newHairStyle" : this.state.newHairStyle
+            },
+            "headCost" : this.state.newHeadCost
         });
         this.props.setActive("listings");
     };
@@ -40,7 +49,6 @@ export default class Create extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <h1>hi create new</h1>
                 <Container>
                     <Accordion>
                         <Accordion.Item eventKey="0">
@@ -110,25 +118,120 @@ export default class Create extends React.Component {
                         <Accordion.Item eventKey="1">
                             <Accordion.Header>Hat/ Hairstyle</Accordion.Header>
                             <Accordion.Body>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                                culpa qui officia deserunt mollit anim id est laborum.
+                            <Stack gap={3}>
+                                    <FormGroup>
+                                        <Form.Label htmlFor="titleHat">Head Dress</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            id="titleHat"
+                                            aria-describedby="titleBlock"
+                                            name="newHeadDress"
+                                            value={this.state.newHeadDress}
+                                            onChange={this.updateFormField}
+                                        />
+                                        <Form.Text id="titleBlock" muted>
+                                            Please do not use any offensive or inappriopriate words.
+                                        </Form.Text>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Form.Label htmlFor="titleHairstyle">Hairstyle</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            id="titleHairstyle"
+                                            aria-describedby="titleBlock"
+                                            name="newHairStyle"
+                                            value={this.state.newHairStyle}
+                                            onChange={this.updateFormField}
+                                        />
+                                        <Form.Text id="titleBlock" muted>
+                                            Please do not use any offensive or inappriopriate words.
+                                        </Form.Text>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Form.Label htmlFor="headCost">Cost of Hair Products or </Form.Label>
+                                        <Form.Control
+                                            type="number"
+                                            id="headCost"
+                                         
+                                            name="newHeadCost"
+                                            value={this.state.newHeadCost}
+                                            onChange={this.updateFormField}
+                                        />
+                                        
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Form.Label htmlFor="headInstructions">Special Remarks</Form.Label>
+                                        <Form.Control
+                                            as='textarea'
+                                            rows={3}
+                                            id="headInstructions"
+                                            placeholder='Please list down any special instructions for styling or any hair products needed'
+                                            name="newHeadInstructions"
+                                            value={this.state.newHeadInstructions}
+                                            onChange={this.updateFormField}
+                                        />
+
+                                    </FormGroup>
+                                    
+                                </Stack>
                             </Accordion.Body>
                         </Accordion.Item>
                         <Accordion.Item eventKey="2">
                             <Accordion.Header>Top</Accordion.Header>
                             <Accordion.Body>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-                                minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                                aliquip ex ea commodo consequat. Duis aute irure dolor in
-                                reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-                                pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                                culpa qui officia deserunt mollit anim id est laborum.
+                            <FormGroup>
+                                        <Form.Label htmlFor="titleTop">Shirt or Top</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            id="titleTop"
+                                            aria-describedby="titleBlock"
+                                            name="newTopName"
+                                            value={this.state.newHeadDress}
+                                            onChange={this.updateFormField}
+                                        />
+                                        <Form.Text id="titleBlock" muted>
+                                            Please do not use any offensive or inappriopriate words.
+                                        </Form.Text>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Form.Label htmlFor="titleHairstyle">Hairstyle</Form.Label>
+                                        <Form.Control
+                                            type="text"
+                                            id="titleHairstyle"
+                                            aria-describedby="titleBlock"
+                                            name="newHairStyle"
+                                            value={this.state.newHairStyle}
+                                            onChange={this.updateFormField}
+                                        />
+                                        <Form.Text id="titleBlock" muted>
+                                            Please do not use any offensive or inappriopriate words.
+                                        </Form.Text>
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Form.Label htmlFor="headCost">Cost of Hair Products or </Form.Label>
+                                        <Form.Control
+                                            type="number"
+                                            id="headCost"
+                                         
+                                            name="newHeadCost"
+                                            value={this.state.newHeadCost}
+                                            onChange={this.updateFormField}
+                                        />
+                                        
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Form.Label htmlFor="headInstructions">Special Remarks</Form.Label>
+                                        <Form.Control
+                                            as='textarea'
+                                            rows={3}
+                                            id="headInstructions"
+                                            placeholder='Please list down any special instructions for styling or any hair products needed'
+                                            name="newHeadInstructions"
+                                            value={this.state.newHeadInstructions}
+                                            onChange={this.updateFormField}
+                                        />
+
+                                    </FormGroup>
                             </Accordion.Body>
                         </Accordion.Item>
                         <Accordion.Item eventKey="3">
