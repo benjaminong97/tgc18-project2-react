@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Container, Accordion, FormGroup, Form, Stack } from 'react-bootstrap';
+import { Container, Accordion, FormGroup, Form, Stack, Button } from 'react-bootstrap';
 
 
 export default class Create extends React.Component {
@@ -21,8 +21,8 @@ export default class Create extends React.Component {
         newBottomName: "",
         newBottomCost: "",
         newBottomInstructions: undefined,
-        newShoesName: "",
-        newShoesCost: "",
+        newShoesName: undefined,
+        newShoesCost: undefined,
         newShoesInstructions: undefined,
         newAccessoriesPresent: "false",
         newAccessoriesName: undefined,
@@ -407,9 +407,9 @@ export default class Create extends React.Component {
                             </Accordion.Body>
                         </Accordion.Item>
                     </Accordion>
-                    <button className="btn btn-primary mt-3" onClick={this.create}>
+                    <Button variant="secondary" className="btn btn-primary mt-3" onClick={this.create}>
                         Create
-                    </button>
+                    </Button>
                 </Container>
 
 

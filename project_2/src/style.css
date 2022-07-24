@@ -5,16 +5,10 @@
     transition: transform 200ms ease-in;
     position: relative
   
-
-    
-
-    
-    
-    
 }
 
 .MainList {
-    height: 520px
+    height: 620px
 }
 
 .Card:hover {
@@ -24,4 +18,8 @@
 .dated {
     position: absolute;
     bottom: 0
+}
+
+body {
+    font-family: "Josefin Sans"
 }

@@ -8,6 +8,7 @@ import TopBar from './TopBar';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import moiraiLogo from "../images/moirai.png"
+import Outfit from './Outfit';
 
 
 export default class Listings extends React.Component {
@@ -18,7 +19,7 @@ export default class Listings extends React.Component {
         tagData: [],
         active: "listings",
         deleted: "",
-        recipeId: ""
+        currentId: "",
     };
 
     renderContent() {
@@ -44,6 +45,14 @@ export default class Listings extends React.Component {
         })
     }
 
+    setOutfit = (page, id) => {
+
+        this.setState({
+            'currentId' : id
+        })
+        this.setActive(page)
+    }
+
     deleteEntry = async (id) => {
         console.log(`${this.url}outfits/delete/${id}`)
         await axios.delete(`${this.url}outfits/delete/${id}`)
@@ -63,7 +72,7 @@ export default class Listings extends React.Component {
                                 <Nav className="me-auto">
                                     <Nav.Link >Home</Nav.Link>
                                     <Nav.Link onClick={() => this.setActive("create")}>Create</Nav.Link>
-
+                                    
                                 </Nav>
                             </Navbar.Collapse>
                         </Container>
@@ -71,13 +80,13 @@ export default class Listings extends React.Component {
 
                     <div className="container">
                         <Helmet>
-                            <style>{'body {background-color: #f5f4d0'}</style>
+                            <style>{'body {background-color: #FFFFFD'}</style>
                         </Helmet>
                         <Row className="g-5">
                             {this.state.data.map(o => <React.Fragment key={o._id}>
                                 <Col xs={12} md={6} lg={4}>
 
-                                    <Card className="Card MainList">
+                                    <Card className="Card MainList m-3" onClick={() => this.setOutfit("outfit", o._id)}>
                                         <Card.Img variant="top" src={o.outfitImage} style={{ height: "350px", objectFit: "cover" }} />
                                         <Card.Body>
                                             <Card.Title>{o.title}</Card.Title>
@@ -87,10 +96,17 @@ export default class Listings extends React.Component {
                                             <Card.Text>
                                                 Price of outfit: ${(Number(o.top.topCost) + Number(o.bottom.bottomCost) + Number(o.shoes.shoesCost)).toFixed(2)}
                                             </Card.Text>
+                                            
+                                            <Container>
                                             <figcaption className="figure-caption dated mb-2">
                                                 Added on: {o.dateAdded}
                                             </figcaption>
+                                            </Container>
                                             
+                                            
+                                        </Card.Body>
+                                        <Card.Body>
+                                        
                                         </Card.Body>
                                     </Card>
                                     
@@ -113,6 +129,7 @@ export default class Listings extends React.Component {
                 <React.Fragment>
                     <Navbar bg="light" expand="lg" className="mb-3">
                         <Container>
+                        
                             <Navbar.Brand onClick={() => this.setActive("listings")}><img src={moiraiLogo} width="50px" className="d-inline-block align-top" /></Navbar.Brand>
                             <Navbar.Toggle aria-controls="basic-navbar-nav" />
                             <Navbar.Collapse id="basic-navbar-nav">
@@ -124,6 +141,9 @@ export default class Listings extends React.Component {
                             </Navbar.Collapse>
                         </Container>
                     </Navbar>
+                    <Helmet>
+                            <style>{'body {background-color: #FFFFFD'}</style>
+                    </Helmet>
                     <Create setActive={this.setActive} />
                 </React.Fragment>
             )
@@ -138,12 +158,15 @@ export default class Listings extends React.Component {
                                 <Nav className="me-auto">
                                     <Nav.Link >Home</Nav.Link>
                                     <Nav.Link onClick={() => this.setActive("create")}>Create</Nav.Link>
-
+                                    
                                 </Nav>
                             </Navbar.Collapse>
                         </Container>
                     </Navbar>
 
+                    <Outfit 
+                    id = {this.state.currentId}
+                    />
 
                 </React.Fragment>
             )
