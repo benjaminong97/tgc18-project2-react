@@ -8,28 +8,27 @@ export default class Create extends React.Component {
 
     state = {
         newTitle: "",
-        newTop: {},
-        newBottom: {},
-        newShoes: {},
         newOutfitImage: "",
         newContributor: "",
         newCaption: "",
-        newHeadDress: "",
-        newHairStyle: "",
-        newHeadCost : "",
+        newHeadDressHairstyle: "",
+        newHeadType: "",
+        newHeadCost: "",
+        newHeadInstructions: undefined,
         newTopName: "",
         newTopCost: "",
-        newTopInstructions: "",
+        newTopInstructions: undefined,
         newBottomName: "",
         newBottomCost: "",
-        newBottomInstructions: "",
+        newBottomInstructions: undefined,
         newShoesName: "",
-        newShoesCost:"",
-        newShoesInstructions: "",
-        newAccessoriesName: "",
-        newAccessoriesCost: "",
-        newAccessoriesInstructions: ""
-        
+        newShoesCost: "",
+        newShoesInstructions: undefined,
+        newAccessoriesPresent: "false",
+        newAccessoriesName: undefined,
+        newAccessoriesCost: undefined,
+        newAccessoriesInstructions: undefined
+
 
     }
 
@@ -39,21 +38,53 @@ export default class Create extends React.Component {
         })
     }
 
+    radioHeadChange = (event) => {
+        this.setState({
+            newHeadType: event.target.value
+        })
+    }
+
+    selectAccessoriesChange = (event) => {
+        this.setState({
+            newAccessoriesPresent: event.target.value
+        })
+    }
 
     create = async () => {
         let response = await axios.post(this.url + "outfits/create", {
             "title": this.state.newTitle,
-            "top": this.state.newTop,
-            "bottom": this.state.newBottom,
-            "shoes": this.state.newShoes,
+            
             "outfitImage": this.state.newOutfitImage,
             "contributor": this.state.newContributor,
-            "fashionDescription" : this.state.newCaption,
+            "fashionDescription": this.state.newCaption,
             "head": {
-                "newHeadDress" : this.state.newHeadDress,
-                "newHairStyle" : this.state.newHairStyle
+                "headDressHairstyle": this.state.newHeadDressHairstyle,
+
+                "headCost": this.state.newHeadCost,
+                "headInstructions": this.state.newHeadInstructions
             },
-            "headCost" : this.state.newHeadCost
+            "top": {
+                "topName": this.state.newTopName,
+                "topCost": this.state.newTopCost,
+                "topInstructions": this.state.newTopInstructions
+            },
+            "bottom": {
+                "bottomName": this.state.newBottomName,
+                "bottomCost": this.state.newBottomCost,
+                "bottomInstructions": this.state.newBottomInstructions
+            },
+            "shoes": {
+                "shoesName": this.state.newShoesName,
+                "shoesCost": this.state.newShoesCost,
+                "shoesInstructions": this.state.newShoesInstructions
+            },
+            "accessories": {
+                "accessoriesName": this.state.newAccessoriesName,
+                "accessoriesCost": this.state.newAccessoriesCost,
+                "accessoriesInstructions": this.state.newAccessoriesInstructions,
+                "accessoriesPresent": this.state.newAccessoriesPresent
+            },
+
         });
         this.props.setActive("listings");
     };
@@ -105,7 +136,7 @@ export default class Create extends React.Component {
                                             value={this.state.newOutfitImage}
                                             onChange={this.updateFormField}
                                         />
-                                    
+
                                     </FormGroup>
                                     <FormGroup>
                                         <Form.Label htmlFor="caption">Caption</Form.Label>
@@ -122,52 +153,54 @@ export default class Create extends React.Component {
                                     </FormGroup>
                                 </Stack>
 
-                                
+
                             </Accordion.Body>
                         </Accordion.Item>
                         <Accordion.Item eventKey="1">
-                            <Accordion.Header>Hat/ Hairstyle</Accordion.Header>
+                            <Accordion.Header>Head Dress or Hairstyle</Accordion.Header>
                             <Accordion.Body>
-                            <Stack gap={3}>
+                                <Stack gap={3}>
                                     <FormGroup>
-                                        <Form.Label htmlFor="titleHat">Head Dress</Form.Label>
+                                        <Form.Label htmlFor="typeHat">Head Dress or Hairstyle?</Form.Label><br />
+                                        <input type="radio" id="headDress" name="head" value="headDress" className="mx-3"
+                                            checked={this.state.newHeadType === "headDress"}
+                                            onChange={this.radioHeadChange} />
+                                        <Form.Label>Head Dress</Form.Label>
+                                        <input type="radio" id="hairStyle" name="head" value="hairstyle" className="mx-3"
+                                            checked={this.state.newHeadType === "hairstyle"}
+                                            onChange={this.radioHeadChange} />
+                                        <Form.Label>Hairstyle</Form.Label>
+                                        <input type="radio" id="none" name="head" value="none" className="mx-3"
+                                            checked={this.state.newHeadType === "none"}
+                                            onChange={this.radioHeadChange} />
+                                        <Form.Label>None</Form.Label>
+
+                                        <br />
+                                        <Form.Label htmlFor="titleHat">Name of Head Dress or Hairstyle</Form.Label>
                                         <Form.Control
                                             type="text"
                                             id="titleHat"
                                             aria-describedby="titleBlock"
-                                            name="newHeadDress"
-                                            value={this.state.newHeadDress}
+                                            name="newHeadDressHairstyle"
+                                            value={this.state.newHeadDressHairstyle}
                                             onChange={this.updateFormField}
                                         />
                                         <Form.Text id="titleBlock" muted>
                                             Please do not use any offensive or inappriopriate words.
                                         </Form.Text>
                                     </FormGroup>
-                                    <FormGroup>
-                                        <Form.Label htmlFor="titleHairstyle">Hairstyle</Form.Label>
-                                        <Form.Control
-                                            type="text"
-                                            id="titleHairstyle"
-                                            aria-describedby="titleBlock"
-                                            name="newHairStyle"
-                                            value={this.state.newHairStyle}
-                                            onChange={this.updateFormField}
-                                        />
-                                        <Form.Text id="titleBlock" muted>
-                                            Please do not use any offensive or inappriopriate words.
-                                        </Form.Text>
-                                    </FormGroup>
+
                                     <FormGroup>
                                         <Form.Label htmlFor="headCost">Cost of Hair Products or Head Dress</Form.Label>
                                         <Form.Control
                                             type="number"
                                             id="headCost"
-                                         
+
                                             name="newHeadCost"
                                             value={this.state.newHeadCost}
                                             onChange={this.updateFormField}
                                         />
-                                        
+
                                     </FormGroup>
                                     <FormGroup>
                                         <Form.Label htmlFor="headRemarks">Special Remarks</Form.Label>
@@ -182,194 +215,201 @@ export default class Create extends React.Component {
                                         />
 
                                     </FormGroup>
-                                    
+
                                 </Stack>
                             </Accordion.Body>
                         </Accordion.Item>
                         <Accordion.Item eventKey="2">
                             <Accordion.Header>Top</Accordion.Header>
                             <Accordion.Body>
-                            <FormGroup>
-                                        <Form.Label htmlFor="titleTop">Top, eg T-Shirt, Blouse</Form.Label>
-                                        <Form.Control
-                                            type="text"
-                                            id="titleTop"
-                                            aria-describedby="titleBlock"
-                                            name="newTopName"
-                                            value={this.state.newTopName}
-                                            onChange={this.updateFormField}
-                                        />
-                                        <Form.Text id="titleBlock" muted>
-                                            Please do not use any offensive or inappriopriate words.
-                                        </Form.Text>
-                                    </FormGroup>
-                                    
-                                    <FormGroup>
-                                        <Form.Label htmlFor="topCost">Cost of Shirt or Top</Form.Label>
-                                        <Form.Control
-                                            type="number"
-                                            id="topCost"
-                                         
-                                            name="newTopCost"
-                                            value={this.state.newTopCost}
-                                            onChange={this.updateFormField}
-                                        />
-                                        
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <Form.Label htmlFor="topRemarks">Remarks or Instructions</Form.Label>
-                                        <Form.Control
-                                            as='textarea'
-                                            rows={3}
-                                            id="topInstructions"
-                                            placeholder='eg. Oversized, Tucked-In'
-                                            name="newTopInstructions"
-                                            value={this.state.newTopInstructions}
-                                            onChange={this.updateFormField}
-                                        />
+                                <FormGroup>
+                                    <Form.Label htmlFor="titleTop">Top, eg T-Shirt, Blouse</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        id="titleTop"
+                                        aria-describedby="titleBlock"
+                                        name="newTopName"
+                                        value={this.state.newTopName}
+                                        onChange={this.updateFormField}
+                                    />
+                                    <Form.Text id="titleBlock" muted>
+                                        Please do not use any offensive or inappriopriate words.
+                                    </Form.Text>
+                                </FormGroup>
 
-                                    </FormGroup>
+                                <FormGroup>
+                                    <Form.Label htmlFor="topCost">Cost of Shirt or Top</Form.Label>
+                                    <Form.Control
+                                        type="number"
+                                        id="topCost"
+
+                                        name="newTopCost"
+                                        value={this.state.newTopCost}
+                                        onChange={this.updateFormField}
+                                    />
+
+                                </FormGroup>
+                                <FormGroup>
+                                    <Form.Label htmlFor="topRemarks">Remarks or Instructions</Form.Label>
+                                    <Form.Control
+                                        as='textarea'
+                                        rows={3}
+                                        id="topInstructions"
+                                        placeholder='eg. Oversized, Tucked-In'
+                                        name="newTopInstructions"
+                                        value={this.state.newTopInstructions}
+                                        onChange={this.updateFormField}
+                                    />
+
+                                </FormGroup>
                             </Accordion.Body>
                         </Accordion.Item>
                         <Accordion.Item eventKey="3">
                             <Accordion.Header>Bottom</Accordion.Header>
                             <Accordion.Body>
-                            <FormGroup>
-                                        <Form.Label htmlFor="titleBottom">Bottom, eg. Pants, Skirt </Form.Label>
-                                        <Form.Control
-                                            type="text"
-                                            id="titleBottom"
-                                            aria-describedby="titleBlock"
-                                            name="newBottomName"
-                                            value={this.state.newBottomName}
-                                            onChange={this.updateFormField}
-                                        />
-                                        <Form.Text id="titleBlock" muted>
-                                            Please do not use any offensive or inappriopriate words.
-                                        </Form.Text>
-                                    </FormGroup>
-                                    
-                                    <FormGroup>
-                                        <Form.Label htmlFor="bottomCost">Cost of Bottom</Form.Label>
-                                        <Form.Control
-                                            type="number"
-                                            id="bottomCost"
-                                         
-                                            name="newBottomCost"
-                                            value={this.state.newBottomCost}
-                                            onChange={this.updateFormField}
-                                        />
-                                        
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <Form.Label htmlFor="bottomRemarks">Remarks or Instructions</Form.Label>
-                                        <Form.Control
-                                            as='textarea'
-                                            rows={3}
-                                            id="topRemarks"
-                                            placeholder='eg. Oversized, Tucked-In'
-                                            name="newBottomInstructions"
-                                            value={this.state.newBottomInstructions}
-                                            onChange={this.updateFormField}
-                                        />
+                                <FormGroup>
+                                    <Form.Label htmlFor="titleBottom">Bottom, eg. Pants, Skirt </Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        id="titleBottom"
+                                        aria-describedby="titleBlock"
+                                        name="newBottomName"
+                                        value={this.state.newBottomName}
+                                        onChange={this.updateFormField}
+                                    />
+                                    <Form.Text id="titleBlock" muted>
+                                        Please do not use any offensive or inappriopriate words.
+                                    </Form.Text>
+                                </FormGroup>
 
-                                    </FormGroup>
+                                <FormGroup>
+                                    <Form.Label htmlFor="bottomCost">Cost of Bottom</Form.Label>
+                                    <Form.Control
+                                        type="number"
+                                        id="bottomCost"
+
+                                        name="newBottomCost"
+                                        value={this.state.newBottomCost}
+                                        onChange={this.updateFormField}
+                                    />
+
+                                </FormGroup>
+                                <FormGroup>
+                                    <Form.Label htmlFor="bottomRemarks">Remarks or Instructions</Form.Label>
+                                    <Form.Control
+                                        as='textarea'
+                                        rows={3}
+                                        id="topRemarks"
+                                        placeholder='eg. Oversized, Tucked-In'
+                                        name="newBottomInstructions"
+                                        value={this.state.newBottomInstructions}
+                                        onChange={this.updateFormField}
+                                    />
+
+                                </FormGroup>
                             </Accordion.Body>
                         </Accordion.Item>
                         <Accordion.Item eventKey="4">
                             <Accordion.Header>Shoes</Accordion.Header>
                             <Accordion.Body>
-                            <FormGroup>
-                                        <Form.Label htmlFor="titleBottom">Bottom, eg. Pants, Skirt </Form.Label>
-                                        <Form.Control
-                                            type="text"
-                                            id="titleBottom"
-                                            aria-describedby="titleBlock"
-                                            name="newBottomName"
-                                            value={this.state.newBottomName}
-                                            onChange={this.updateFormField}
-                                        />
-                                        <Form.Text id="titleBlock" muted>
-                                            Please do not use any offensive or inappriopriate words.
-                                        </Form.Text>
-                                    </FormGroup>
-                                    
-                                    <FormGroup>
-                                        <Form.Label htmlFor="bottomCost">Cost of Bottom</Form.Label>
-                                        <Form.Control
-                                            type="number"
-                                            id="bottomCost"
-                                         
-                                            name="newBottomCost"
-                                            value={this.state.newBottomCost}
-                                            onChange={this.updateFormField}
-                                        />
-                                        
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <Form.Label htmlFor="bottomRemarks">Remarks or Instructions</Form.Label>
-                                        <Form.Control
-                                            as='textarea'
-                                            rows={3}
-                                            id="bottomRemarks"
-                                            placeholder='eg. Oversized, Tucked-In'
-                                            name="newBottomInstructions"
-                                            value={this.state.newBottomInstructions}
-                                            onChange={this.updateFormField}
-                                        />
+                                <FormGroup>
+                                    <Form.Label htmlFor="titleShoes">Shoe Model</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        id="titleShoes"
+                                        aria-describedby="titleBlock"
+                                        name="newShoesName"
+                                        value={this.state.newShoesName}
+                                        onChange={this.updateFormField}
+                                    />
+                                    <Form.Text id="titleBlock" muted>
+                                        Please do not use any offensive or inappriopriate words.
+                                    </Form.Text>
+                                </FormGroup>
 
-                                    </FormGroup>
+                                <FormGroup>
+                                    <Form.Label htmlFor="shoesCost">Cost of Bottom</Form.Label>
+                                    <Form.Control
+                                        type="number"
+                                        id="shoesCost"
+
+                                        name="newShoesCost"
+                                        value={this.state.newShoesCost}
+                                        onChange={this.updateFormField}
+                                    />
+
+                                </FormGroup>
+                                <FormGroup>
+                                    <Form.Label htmlFor="shoesRemarks">Remarks or Instructions</Form.Label>
+                                    <Form.Control
+                                        as='textarea'
+                                        rows={3}
+                                        id="shoesRemarks"
+                                        placeholder='eg. Laces Swapped Out, Ankle Socks'
+                                        name="newShoesInstructions"
+                                        value={this.state.newShoesInstructions}
+                                        onChange={this.updateFormField}
+                                    />
+
+                                </FormGroup>
                             </Accordion.Body>
                         </Accordion.Item>
                         <Accordion.Item eventKey="5">
                             <Accordion.Header>Accessories</Accordion.Header>
                             <Accordion.Body>
-                            <FormGroup>
-                                        <Form.Label htmlFor="titleAccessory">Bottom, eg. Pants, Skirt </Form.Label>
-                                        <Form.Control
-                                            type="text"
-                                            id="titleAccessory"
-                                            aria-describedby="titleBlock"
-                                            name="newBottomName"
-                                            value={this.state.newAccessoryName}
-                                            onChange={this.updateFormField}
-                                        />
-                                        <Form.Text id="titleBlock" muted>
-                                            Please do not use any offensive or inappriopriate words.
-                                        </Form.Text>
-                                    </FormGroup>
-                                    
-                                    <FormGroup>
-                                        <Form.Label htmlFor="accesoryCost">Cost of Bottom</Form.Label>
-                                        <Form.Control
-                                            type="number"
-                                            id="accessoryCost"
-                                         
-                                            name="newAccessoryCost"
-                                            value={this.state.newAccessoryCost}
-                                            onChange={this.updateFormField}
-                                        />
+                                <FormGroup>
+                                    <Form.Label>Does the outfit have an accessory?</Form.Label>
+                                    <Form.Select aria-label="Default select example"
+                                    onChange={this.selectAccessoriesChange}>
+                                        <option value="false">No</option>
+                                        <option value="true">Yes</option>
                                         
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <Form.Label htmlFor="accessoryRemarks">Remarks or Instructions</Form.Label>
-                                        <Form.Control
-                                            as='textarea'
-                                            rows={3}
-                                            id="accessoryRemarks"
-                                            placeholder='eg. Oversized, Tucked-In'
-                                            name="newAccessoryInstructions"
-                                            value={this.state.newAccessoryInstructions}
-                                            onChange={this.updateFormField}
-                                        />
+                                        
+                                    </Form.Select>
+                                    <br/>
+                                    <Form.Label htmlFor="titleAccessory">If yes, Name of accessory</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        id="titleAccessory"
+                                        aria-describedby="titleBlock"
+                                        name="newBottomName"
+                                        value={this.state.newAccessoryName}
+                                        onChange={this.updateFormField}
+                                    />
+                                    
+                                </FormGroup>
 
-                                    </FormGroup>
+                                <FormGroup>
+                                    <Form.Label htmlFor="accesoryCost">Cost of Bottom</Form.Label>
+                                    <Form.Control
+                                        type="number"
+                                        id="accessoryCost"
+
+                                        name="newAccessoryCost"
+                                        value={this.state.newAccessoryCost}
+                                        onChange={this.updateFormField}
+                                    />
+
+                                </FormGroup>
+                                <FormGroup>
+                                    <Form.Label htmlFor="accessoryRemarks">Remarks or Instructions</Form.Label>
+                                    <Form.Control
+                                        as='textarea'
+                                        rows={3}
+                                        id="accessoryRemarks"
+                                        placeholder='eg. Oversized, Tucked-In'
+                                        name="newAccessoryInstructions"
+                                        value={this.state.newAccessoryInstructions}
+                                        onChange={this.updateFormField}
+                                    />
+
+                                </FormGroup>
                             </Accordion.Body>
                         </Accordion.Item>
                     </Accordion>
                     <button className="btn btn-primary mt-3" onClick={this.create}>
-                                    Create
-                                </button>
+                        Create
+                    </button>
                 </Container>
 
 

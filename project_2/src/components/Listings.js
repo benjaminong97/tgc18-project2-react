@@ -55,7 +55,7 @@ export default class Listings extends React.Component {
             return (
                 <React.Fragment>
 
-                    <Navbar bg="light" expand="lg">
+                    <Navbar bg="light" expand="lg" className="mb-3">
                         <Container>
                             <Navbar.Brand onClick={() => this.setActive("listings")}><img src={moiraiLogo} width="50px" className="d-inline-block align-top" /></Navbar.Brand>
                             <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -77,47 +77,26 @@ export default class Listings extends React.Component {
                             {this.state.data.map(o => <React.Fragment key={o._id}>
                                 <Col xs={12} md={6} lg={4}>
 
-                                    <Card className="Card">
-                                        <Card.Img variant="top" src={o.outfitImage} style={{ height: "300px", objectFit: "cover" }} />
+                                    <Card className="Card MainList">
+                                        <Card.Img variant="top" src={o.outfitImage} style={{ height: "350px", objectFit: "cover" }} />
                                         <Card.Body>
                                             <Card.Title>{o.title}</Card.Title>
                                             <Card.Text>
                                                 {o.fashionDescription}
                                             </Card.Text>
-                                            <figcaption className="figure-caption">
+                                            <Card.Text>
+                                                Price of outfit: ${(Number(o.top.topCost) + Number(o.bottom.bottomCost) + Number(o.shoes.shoesCost)).toFixed(2)}
+                                            </Card.Text>
+                                            <figcaption className="figure-caption dated mb-2">
                                                 Added on: {o.dateAdded}
                                             </figcaption>
-                                            <Button variant="primary">Go somewhere</Button>
+                                            
                                         </Card.Body>
                                     </Card>
-                                    {/* <div class="profile-card-4 text-center"><img src="http://envato.jayasankarkr.in/code/profile/assets/img/profile-4.jpg" class="img img-responsive"/>
-                                        <div class="profile-content">
-                                            <div class="profile-name">John Doe
-                                                <p>@johndoedesigner</p>
-                                            </div>
-                                            <div class="profile-description">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor.</div>
-                                            <div class="row">
-                                                <div class="col-xs-4">
-                                                    <div class="profile-overview">
-                                                        <p>TWEETS</p>
-                                                        <h4>1300</h4></div>
-                                                </div>
-                                                <div class="col-xs-4">
-                                                    <div class="profile-overview">
-                                                        <p>FOLLOWERS</p>
-                                                        <h4>250</h4></div>
-                                                </div>
-                                                <div class="col-xs-4">
-                                                    <div class="profile-overview">
-                                                        <p>FOLLOWING</p>
-                                                        <h4>168</h4></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> */}
+                                    
                                 </Col>
 
-                                <Button variant="danger" onClick={() => this.deleteEntry(o._id)}>Delete</Button>
+                                {/* <Button variant="danger" onClick={() => this.deleteEntry(o._id)}>Delete</Button> */}
 
 
 
@@ -132,7 +111,7 @@ export default class Listings extends React.Component {
         } else if (this.state.active === "create") {
             return (
                 <React.Fragment>
-                    <Navbar bg="light" expand="lg">
+                    <Navbar bg="light" expand="lg" className="mb-3">
                         <Container>
                             <Navbar.Brand onClick={() => this.setActive("listings")}><img src={moiraiLogo} width="50px" className="d-inline-block align-top" /></Navbar.Brand>
                             <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -164,9 +143,11 @@ export default class Listings extends React.Component {
                             </Navbar.Collapse>
                         </Container>
                     </Navbar>
+
+
                 </React.Fragment>
             )
-        }
+        } 
 
     }
 
