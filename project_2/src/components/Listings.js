@@ -2,13 +2,15 @@ import React from 'react';
 import axios from 'axios';
 import { Helmet } from 'react-helmet';
 import Create from './Create';
-import { Container, Row, Button, Card, Col, Badge, Modal, Accordion } from 'react-bootstrap';
+import { Container, Row, Button, Card, Col, Badge, Modal, Accordion, Carousel } from 'react-bootstrap';
 import "../style.css"
 import TopBar from './TopBar';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import moiraiLogo from "../images/moirai.png"
 import Outfit from './Outfit';
+import Banner from './Banner';
+import Search from './Search';
 
 
 export default class Listings extends React.Component {
@@ -63,20 +65,13 @@ export default class Listings extends React.Component {
         if (this.state.active === "listings") {
             return (
                 <React.Fragment>
+                    <TopBar setActive = {this.setActive}/>
+                    
 
-                    <Navbar bg="light" expand="lg" className="mb-3">
-                        <Container>
-                            <Navbar.Brand onClick={() => this.setActive("listings")}><img src={moiraiLogo} width="50px" className="d-inline-block align-top" /></Navbar.Brand>
-                            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                            <Navbar.Collapse id="basic-navbar-nav">
-                                <Nav className="me-auto">
-                                    <Nav.Link >Home</Nav.Link>
-                                    <Nav.Link onClick={() => this.setActive("create")}>Create</Nav.Link>
-                                    
-                                </Nav>
-                            </Navbar.Collapse>
-                        </Container>
-                    </Navbar>
+                    <Container fluid>
+                    <Banner/>
+                    </Container>
+                    
 
                     <div className="container">
                         <Helmet>
@@ -86,7 +81,7 @@ export default class Listings extends React.Component {
                             {this.state.data.map(o => <React.Fragment key={o._id}>
                                 <Col xs={12} md={6} lg={4}>
 
-                                    <Card className="Card MainList m-3" onClick={() => this.setOutfit("outfit", o._id)}>
+                                    <Card className="Card MainList m-3" onClick={() => this.setOutfit("outfit", o._id)} style={{height: "600px"}}>
                                         <Card.Img variant="top" src={o.outfitImage} style={{ height: "350px", objectFit: "cover" }} />
                                         <Card.Body>
                                             <Card.Title>{o.title}</Card.Title>
@@ -127,20 +122,7 @@ export default class Listings extends React.Component {
         } else if (this.state.active === "create") {
             return (
                 <React.Fragment>
-                    <Navbar bg="light" expand="lg" className="mb-3">
-                        <Container>
-                        
-                            <Navbar.Brand onClick={() => this.setActive("listings")}><img src={moiraiLogo} width="50px" className="d-inline-block align-top" /></Navbar.Brand>
-                            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                            <Navbar.Collapse id="basic-navbar-nav">
-                                <Nav className="me-auto">
-                                    <Nav.Link >Home</Nav.Link>
-                                    <Nav.Link onClick={() => this.setActive("create")}>Create</Nav.Link>
-
-                                </Nav>
-                            </Navbar.Collapse>
-                        </Container>
-                    </Navbar>
+                    <TopBar setActive = {this.setActive}/>
                     <Helmet>
                             <style>{'body {background-color: #FFFFFD'}</style>
                     </Helmet>
@@ -150,19 +132,7 @@ export default class Listings extends React.Component {
         } else if (this.state.active === "outfit") {
             return (
                 <React.Fragment>
-                    <Navbar bg="light" expand="lg">
-                        <Container>
-                            <Navbar.Brand onClick={() => this.setActive("listings")}><img src={moiraiLogo} width="50px" className="d-inline-block align-top" /></Navbar.Brand>
-                            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                            <Navbar.Collapse id="basic-navbar-nav">
-                                <Nav className="me-auto">
-                                    <Nav.Link >Home</Nav.Link>
-                                    <Nav.Link onClick={() => this.setActive("create")}>Create</Nav.Link>
-                                    
-                                </Nav>
-                            </Navbar.Collapse>
-                        </Container>
-                    </Navbar>
+                    <TopBar setActive = {this.setActive}/>
 
                     <Outfit 
                     id = {this.state.currentId}
@@ -170,7 +140,19 @@ export default class Listings extends React.Component {
 
                 </React.Fragment>
             )
-        } 
+        } else if (this.state.active ==="search") {
+            return (
+                <React.Fragment>
+                    <TopBar 
+                    setActive = {this.setActive} 
+                    setOutfit = {this.setOutfit} 
+                    updateFormField = {this.updateFormField}
+                    />
+
+                    <Search/>
+                </React.Fragment>
+            )
+        }
 
     }
 

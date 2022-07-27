@@ -23,3 +23,16 @@
 body {
     font-family: "Josefin Sans"
 }
+
+.bannerCaption {
+    /* background-image: linear-gradient(
+        to top, rgba(255, 255, 255, 1), transparent
+      ); */
+
+    background-color: rgba(105, 105, 104, 0.8);
+    font-family: "Josefin Sans"
+}
+
+.bannerText {
+    font-family: "Josefin Sans"
+}

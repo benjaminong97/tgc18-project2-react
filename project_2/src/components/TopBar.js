@@ -9,35 +9,27 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 
 export default class TopBar extends React.Component {
 
-    state = {
-        data: [],
-        tagData: [],
-        active: "listings",
-        deleted: ""
-    };
+   
 
-    setActive = (page) => {
-        this.setState({
-            'active': page
-        })
-    }
-
+   
     render() {
         return (
             <React.Fragment>
-                <Navbar bg="light" expand="lg">
-                    <Container>
-                        <Navbar.Brand onClick={() => this.setActive("listings")}><img src={moiraiLogo} width="50px" className="d-inline-block align-top"/></Navbar.Brand>
-                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                        <Navbar.Collapse id="basic-navbar-nav">
-                            <Nav className="me-auto">
-                                <Nav.Link >Home</Nav.Link>
-                                <Nav.Link onClick={() => this.setActive("create")}>Create</Nav.Link>
-                                
-                            </Nav>
-                        </Navbar.Collapse>
-                    </Container>
-                </Navbar>
+               <Navbar bg="light" expand="lg" className="mb-3">
+                        <Container>
+                            <Navbar.Brand onClick={() => this.props.setActive("listings")}><img src={moiraiLogo} width="50px" className="d-inline-block align-top" /></Navbar.Brand>
+                            
+                            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                            <Navbar.Collapse id="basic-navbar-nav">
+                                <Nav className="me-auto">
+                                    <Nav.Link onClick={() => this.props.setActive("listings")}>Home</Nav.Link>
+                                    <Nav.Link onClick={() => this.props.setActive("create")}>Create</Nav.Link>
+                                    <Nav.Link onClick={() => this.props.setActive("search")}>Search</Nav.Link>
+                                    
+                                </Nav>
+                            </Navbar.Collapse>
+                        </Container>
+                    </Navbar>
             </React.Fragment>
         )
     }

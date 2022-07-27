@@ -87,6 +87,10 @@ export default class Create extends React.Component {
 
         });
         this.props.setActive("listings");
+        let response2 = await axios.get(this.url + "outfits");
+        this.setState({
+            data : response2.data
+        })
     };
 
     render() {
@@ -328,7 +332,7 @@ export default class Create extends React.Component {
                                 </FormGroup>
 
                                 <FormGroup>
-                                    <Form.Label htmlFor="shoesCost">Cost of Bottom</Form.Label>
+                                    <Form.Label htmlFor="shoesCost">Cost of Shoes</Form.Label>
                                     <Form.Control
                                         type="number"
                                         id="shoesCost"
