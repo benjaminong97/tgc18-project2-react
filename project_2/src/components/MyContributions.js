@@ -3,14 +3,14 @@ import axios from 'axios';
 import { Form, Container, Button, Row, Card, Col } from 'react-bootstrap';
 import { Helmet } from 'react-helmet';
 import TopBar from './TopBar';
-import Outfit from './Outfit';
+import MyOutfit from './MyOutfit';
 
 export default class Search extends React.Component {
     url = "https://3000-benjaminong-tgc18projec-2tqzczadh2e.ws-us54.gitpod.io/"
 
     state = {
         query: "",
-        queryCategory: "title",
+        queryCategory: "contributor",
         data: [],
         id: "",
         active: "search"
@@ -25,10 +25,9 @@ export default class Search extends React.Component {
     //function that sends the query to the server, retrieves the information
     // stores the retrieved information in state.data
     queryData = async () => {
+        //encode to deal with & in query string
+        let response = await axios.get(this.url + "myoutfit/search?query=" + encodeURIComponent(this.state.query)
         
-        let response = await axios.get(this.url + "outfit/search?" + "category=" +
-        this.state.queryCategory + "&query=" + this.state.query
-        + "&querycatname=" + this.state.queryCategory+"Name"
         );
         this.setState ({
             data : response.data
@@ -49,8 +48,9 @@ export default class Search extends React.Component {
     setOutfit = (page, id) => {
 
         this.setState({
-            'currentId' : id
+            'id' : id
         })
+        console.log(id)
         this.setActive(page)
     }
 
@@ -61,27 +61,19 @@ export default class Search extends React.Component {
                 <React.Fragment>
                     <Container>
                         <Form.Group>
-                            <Form.Select aria-label="Default select example"
-                            onChange={this.selectCategoryChange}
-                            >
-                                <option value="title">Outfit Title</option>
-                                <option value="top">Top</option>
-                                <option value="bottom">Bottom</option>
-                                <option value="shoes">Shoes</option>
-                                <option value="accessories">Accessories</option>
-                                <option value="contributor">Contributor</option>
-                            </Form.Select>
+                            
                             <Form.Control
                                 type="text"
                                 name="query"
                                 value={this.state.query}
                                 onChange={this.updateFormField}
+                                placeholder="Contributor (Case Sensitive)"
                             />
                             <Button 
                             onClick={this.queryData}
                             className="mt-2" 
                             variant="outline-secondary">
-                                Search
+                                Find My Outfits
                             </Button>
                         </Form.Group>
     
@@ -121,7 +113,7 @@ export default class Search extends React.Component {
     
                                 </Col>
     
-                                {/* <Button variant="danger" onClick={() => this.deleteEntry(o._id)}>Delete</Button> */}
+                                
     
     
     
@@ -138,8 +130,9 @@ export default class Search extends React.Component {
                 <React.Fragment>
                     
 
-                    <Outfit 
-                    id = {this.state.currentId}
+                    <MyOutfit 
+                    id = {this.state.id}
+                    setActive = {this.setActive}
                     />
 
                 </React.Fragment>
@@ -149,11 +142,5 @@ export default class Search extends React.Component {
     }
 
 
-    async componentDidMount() {
-        let response = await axios.get(this.url + "outfits")
-        this.setState({
-            data: response.data
-        })
-    }
 
 }

@@ -15,7 +15,7 @@ export default class TopBar extends React.Component {
     render() {
         return (
             <React.Fragment>
-               <Navbar bg="light" expand="lg" className="mb-3">
+               <Navbar bg="light" expand="lg" className="mb-3 topBar">
                         <Container>
                             <Navbar.Brand onClick={() => this.props.setActive("listings")}><img src={moiraiLogo} width="50px" className="d-inline-block align-top" /></Navbar.Brand>
                             
@@ -25,6 +25,7 @@ export default class TopBar extends React.Component {
                                     <Nav.Link onClick={() => this.props.setActive("listings")}>Home</Nav.Link>
                                     <Nav.Link onClick={() => this.props.setActive("create")}>Create</Nav.Link>
                                     <Nav.Link onClick={() => this.props.setActive("search")}>Search</Nav.Link>
+                                    <Nav.Link onClick={() => this.props.setActive("myContributions")}>My Contributions</Nav.Link>
                                     
                                 </Nav>
                             </Navbar.Collapse>

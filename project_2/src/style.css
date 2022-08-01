@@ -36,3 +36,14 @@ body {
 .bannerText {
     font-family: "Josefin Sans"
 }
+
+.topBar {
+    position: sticky; 
+    top : 0;
+    z-index: 3555
+}
+
+.formErrors {
+    background-color: lightpink;
+    color: maroon
+}

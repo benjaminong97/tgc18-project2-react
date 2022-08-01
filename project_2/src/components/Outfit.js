@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Row, Container, Col, Button, Form } from 'react-bootstrap'
+import { Row, Container, Col, Button, Form, Table, Card } from 'react-bootstrap'
 
 export default class Outfit extends React.Component {
     url = "https://3000-benjaminong-tgc18projec-2tqzczadh2e.ws-us54.gitpod.io/";
@@ -9,7 +9,7 @@ export default class Outfit extends React.Component {
         id: this.props.id,
         data: {},
         activeTab: "overview",
-        newComment : "",
+        newComment: "",
         reset: ""
     }
 
@@ -30,14 +30,14 @@ export default class Outfit extends React.Component {
     }
 
     sendComment = async () => {
-        
+
         let response = await axios.put(this.url + "outfit/comment", {
-            "id" : this.state.id ,
-            "newComment" : this.state.newComment
+            "id": this.state.id,
+            "newComment": this.state.newComment
         })
-        
+
         this.setState({
-            newComment : ""
+            newComment: ""
         })
         let response2 = await axios.get(this.url + "outfit?id=" + this.state.id)
         this.setState({
@@ -45,7 +45,7 @@ export default class Outfit extends React.Component {
         })
     }
 
-    
+
 
     render() {
         return (
@@ -87,45 +87,189 @@ export default class Outfit extends React.Component {
 
 
                             {this.state.activeTab === "top" && (
-                                <Container>
-                                    <h4>Name of Top: {this.state.data.top ? this.state.data.top.topName : ""}</h4>
-                                    <h4>Cost of Top: ${this.state.data.top ? this.state.data.top.topCost : ""}</h4>
-                                    <h5>Remarks or Special Instructions: {this.state.data.top.topInstructions ? this.state.data.top.topInstructions : "No Remarks"}</h5>
+                                <Container className="m-3">
+                                    <Table striped bordered hover>
+                                        <tbody>
+                                            <tr>
+                                                <td>Name of Top:</td>
+                                                <td>{this.state.data.top ? this.state.data.top.topName : ""}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Cost of Top:</td>
+                                                <td>${this.state.data.top ? this.state.data.top.topCost : ""}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Remarks or Special Instructions:</td>
+                                                <td>{this.state.data.top.topInstructions ? this.state.data.top.topInstructions : "No Remarks"}</td>
+                                            </tr>
+                                        </tbody>
+                                    </Table>
+
                                 </Container>
                             )}
                             {this.state.activeTab === "overview" && (
-                                <Container>
-                                    <h4>{this.state.data ? this.state.data.fashionDescription : ""}</h4>
-                                    <h4>Contributor: {this.state.data ? this.state.data.contributor : ""}</h4>
-                                    <h5>Date Added: {this.state.data ? this.state.data.dateAdded : ""}</h5>
+                                <Container className="m-3">
+                                    <Table striped bordered hover>
+                                        <tbody>
+                                            <tr>
+
+                                                <td>
+                                                    Caption:
+                                                </td>
+                                                <td>
+                                                    {this.state.data ? this.state.data.fashionDescription : ""}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Contributor:</td>
+                                                <td>{this.state.data ? this.state.data.contributor : ""}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Date Added:
+                                                </td>
+                                                <td>
+                                                    {this.state.data ? this.state.data.dateAdded : ""}
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
+                                    </Table>
                                 </Container>
                             )}
                             {this.state.activeTab === "head" && (
-                                <Container>
-                                    <h4>Name of Head Dress or Hairstyle: {this.state.data.head.headDressHairstyle ? this.state.data.head.headDressHairstyle : "Not Specified"}</h4>
-                                    <h4>Cost of Head Dress or Hair Products: ${this.state.data.head.headCost ? this.state.data.head.headCost : "0"}</h4>
-                                    <h5>Remarks or Special Instructions: {this.state.data.top.topInstructions ? this.state.data.head.headInstructions : "No Remarks"}</h5>
+                                <Container className="m-3">
+                                    <Table striped bordered hover>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Name of Head Dress or Hairstyle:
+                                                </td>
+                                                <td>
+                                                    {this.state.data.head.headDressHairstyle ? this.state.data.head.headDressHairstyle : "Not Specified"}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Cost of Head Dress or Hair Products:
+                                                </td>
+                                                <td>
+                                                    ${this.state.data.head.headCost ? this.state.data.head.headCost : "0"}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Remarks or Special Instructions:
+                                                </td>
+                                                <td>
+                                                    {this.state.data.top.topInstructions ? this.state.data.head.headInstructions : "No Remarks"}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </Table>
+
                                 </Container>
                             )}
                             {this.state.activeTab === "bottom" && (
-                                <Container>
-                                    <h4>Name of Bottom: {this.state.data.bottom ? this.state.data.bottom.bottomName : ""}</h4>
-                                    <h4>Cost of Bottom: ${this.state.data.bottom ? this.state.data.bottom.bottomCost : ""}</h4>
-                                    <h5>Remarks or Special Instructions: {this.state.data.bottom.bottomInstructions ? this.state.data.bottom.bottomInstructions : "No Remarks"}</h5>
+                                <Container className="m-3">
+                                    <Table striped bordered hover>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Name of Bottom:
+                                                </td>
+                                                <td>
+                                                    {this.state.data.bottom ? this.state.data.bottom.bottomName : ""}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Cost of Bottom:
+                                                </td>
+                                                <td>
+                                                    ${this.state.data.bottom ? this.state.data.bottom.bottomCost : ""}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Remarks or Special Instructions:
+                                                </td>
+                                                <td>
+                                                    {this.state.data.bottom.bottomInstructions ? this.state.data.bottom.bottomInstructions : "No Remarks"}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </Table>
+
                                 </Container>
                             )}
                             {this.state.activeTab === "shoes" && (
-                                <Container>
-                                    <h4>Model of Shoes: {this.state.data.shoes ? this.state.data.shoes.shoesName : ""}</h4>
-                                    <h4>Cost of Shoes: ${this.state.data.shoes ? this.state.data.shoes.shoesCost : ""}</h4>
-                                    <h5>Remarks or Special Instructions: {this.state.data.shoes.shoesInstructions ? this.state.data.shoes.shoesInstructions : "No Remarks"}</h5>
+                                <Container className="m-3">
+                                    <Table striped bordered hover>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Model of Shoes:
+                                                </td>
+                                                <td>
+                                                    {this.state.data.shoes ? this.state.data.shoes.shoesName : ""}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Cost of Shoes:
+                                                </td>
+                                                <td>
+                                                    ${this.state.data.shoes ? this.state.data.shoes.shoesCost : ""}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Remarks or Special Instructions:
+                                                </td>
+                                                <td>
+                                                    {this.state.data.shoes.shoesInstructions ? this.state.data.shoes.shoesInstructions : "No Remarks"}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+
+                                    </Table>
+
                                 </Container>
                             )}
                             {this.state.activeTab === "accessories" && (
-                                <Container>
-                                    <h4>Name of Accessory: {this.state.data.accessories.accessoriesName ? this.state.data.accessories.accessoriesName : "No Accessory"}</h4>
-                                    <h4>Cost of Accessory: ${this.state.data.accessories.accessoriesCost ? this.state.data.accessories.accessoriesCost : "0"}</h4>
-                                    <h5>Remarks or Special Instructions: {this.state.data.accessories.accessoriesInstructions ? this.state.data.accessories.accessoriesInstructions : "No Remarks"}</h5>
+                                <Container className="m-3">
+                                    <Table striped bordered hover>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Name of Accessory:
+                                                </td>
+                                                <td>
+                                                    {this.state.data.accessories.accessoriesName ? this.state.data.accessories.accessoriesName : "No Accessory"}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Cost of Accessory:
+                                                </td>
+                                                <td>
+                                                    ${this.state.data.accessories.accessoriesCost ? this.state.data.accessories.accessoriesCost : "0"}
+                                                </td>
+
+
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Remarks or Special Instructions:
+                                                </td>
+                                                <td>
+                                                    {this.state.data.accessories.accessoriesInstructions ? this.state.data.accessories.accessoriesInstructions : "No Remarks"}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </Table>
+
                                 </Container>
                             )}
                         </Col>
@@ -142,22 +286,30 @@ export default class Outfit extends React.Component {
                     />
                     <Button variant="secondary"
                         className="m-2"
-                        onClick= {this.sendComment}
+                        onClick={this.sendComment}
                     >Comment</Button>
-                </Container>
-                <Container className="m-2">
-                    {this.state.data.comments ? 
 
-                    
-                    this.state.data.comments.map(c => <React.Fragment key={c.time}>
-                        <Container className="m-3">
-                        <figcaption>{c.time}</figcaption>
-                        <h6>{c.comment}</h6>
-                        </Container>
-                        
-                        
-                    </React.Fragment>) : null}
+                    <Container className="m-2">
+                        {this.state.data.comments ?
+
+
+                            this.state.data.comments.slice(0).reverse().map(c => <React.Fragment key={c.time}>
+                                <Container className="m-3">
+                                    <Card>
+                                        <Card.Header>
+                                            <figcaption>{c.time}</figcaption>
+                                            <h6>{c.comment}</h6>
+                                        </Card.Header>
+
+                                    </Card>
+
+                                </Container>
+
+
+                            </React.Fragment>) : null}
+                    </Container>
                 </Container>
+
             </React.Fragment>
         )
     }

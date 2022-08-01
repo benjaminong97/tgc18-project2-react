@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Container, Accordion, FormGroup, Form, Stack, Button } from 'react-bootstrap';
+import { FormErrors } from './FormErrors';
 
 
 export default class Create extends React.Component {
@@ -27,15 +28,60 @@ export default class Create extends React.Component {
         newAccessoriesPresent: "false",
         newAccessoriesName: undefined,
         newAccessoriesCost: undefined,
-        newAccessoriesInstructions: undefined
+        newAccessoriesInstructions: undefined,
+        titleValid : false,
+        outfitImageValid: false,
+        contributorValid: false,
+        captionValid: false,
+        formErrors : {
+            newTitle : "",
+            newOutfitImage : "",
+            newCaption: "",
+            newContributor: ""
+        },
+        validated : false
+
 
 
     }
 
     updateFormField = (event) => {
         this.setState({
-            [event.target.name]: event.target.value
+            [event.target.name]: event.target.value,
+            
+        }, () => {this.validateField(event.target.name, event.target.value)})
+    }
+
+    validateForm() {
+        this.setState({
+            formValid: this.state.newTitle && this.state.newOutfitImage
         })
+    }
+
+    validateField(fieldName, value) {
+        let fieldValidationErrors = this.state.formErrors;
+        let titleValid = this.state.titleValid;
+        let outfitImageValid = this.state.outfitImageValid;
+        let contributorValid = this.state.contributorValid;
+        let captionValid = this.state.captionValid;
+
+        
+
+        switch(fieldName) {
+            case "newTitle" :
+                titleValid = value.length >= 5;
+                fieldValidationErrors.newTitle = titleValid ? '' : 'is too short';
+                break;
+            case "newOutfitImage" :
+                outfitImageValid = value.length >= 8;
+                fieldValidationErrors.newOutfitImage = outfitImageValid ? '' : 'not a valid link';
+                break;
+        }
+        this.setState({
+            formErrors : fieldValidationErrors,
+            titleValid : titleValid,
+            outfitImageValid : outfitImageValid
+        }, this.validateForm)
     }
 
     radioHeadChange = (event) => {
@@ -86,6 +132,11 @@ export default class Create extends React.Component {
             },
 
         });
+        this.setState({
+            validated : true
+
+        }, await this.validateForm)
+
         this.props.setActive("listings");
         let response2 = await axios.get(this.url + "outfits");
         this.setState({
@@ -96,6 +147,9 @@ export default class Create extends React.Component {
     render() {
         return (
             <React.Fragment>
+                <Container>
+                    <FormErrors formErrors={this.state.formErrors} />
+                </Container>
                 <Container>
                     <Accordion>
                         <Accordion.Item eventKey="0">

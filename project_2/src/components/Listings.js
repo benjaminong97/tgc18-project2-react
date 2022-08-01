@@ -11,6 +11,7 @@ import moiraiLogo from "../images/moirai.png"
 import Outfit from './Outfit';
 import Banner from './Banner';
 import Search from './Search';
+import MyContributions from './MyContributions';
 
 
 export default class Listings extends React.Component {
@@ -24,21 +25,7 @@ export default class Listings extends React.Component {
         currentId: "",
     };
 
-    renderContent() {
-        if (this.state.active === "listings") {
-            return (
-                <React.Fragment>
-                    <Listings />
-                </React.Fragment>
-            );
-        } else if (this.state.active === "create") {
-            return (
-                <React.Fragment>
-                    {/* <Create /> */}
-                </React.Fragment>
-            )
-        }
-    }
+    
 
 
     setActive = (page) => {
@@ -55,11 +42,11 @@ export default class Listings extends React.Component {
         this.setActive(page)
     }
 
-    deleteEntry = async (id) => {
-        console.log(`${this.url}outfits/delete/${id}`)
-        await axios.delete(`${this.url}outfits/delete/${id}`)
-        window.location.reload()
-    }
+    // deleteEntry = async (id) => {
+    //     console.log(`${this.url}outfits/delete/${id}`)
+    //     await axios.delete(`${this.url}outfits/delete/${id}`)
+    //     window.location.reload()
+    // }
 
     render() {
         if (this.state.active === "listings") {
@@ -150,6 +137,18 @@ export default class Listings extends React.Component {
                     />
 
                     <Search/>
+                </React.Fragment>
+            )
+        } else if (this.state.active === "myContributions") {
+            return (
+                <React.Fragment>
+                    <TopBar 
+                    setActive = {this.setActive} 
+                    setOutfit = {this.setOutfit} 
+                    updateFormField = {this.updateFormField}
+                    />
+
+                    <MyContributions/>
                 </React.Fragment>
             )
         }
