@@ -13,7 +13,7 @@ export default class Create extends React.Component {
         newContributor: "",
         newCaption: "",
         newHeadDressHairstyle: "",
-        newHeadType: "",
+        newHeadType: "none",
         newHeadCost: "",
         newHeadInstructions: undefined,
         newTopName: "",
@@ -39,7 +39,8 @@ export default class Create extends React.Component {
             newCaption: "",
             newContributor: ""
         },
-        validated : false
+        validated : false,
+        newTags : []
 
 
 
@@ -56,6 +57,26 @@ export default class Create extends React.Component {
         this.setState({
             formValid: this.state.newTitle && this.state.newOutfitImage
         })
+    }
+
+    checkboxTagsChange = (event) => {
+        if (this.state.newTags.includes(event.target.value)) {
+            let tagIndex = this.state.newTags.indexOf(event.target.value)
+            let clonedArray = this.state.newTags.slice(0)
+            clonedArray.splice(tagIndex,1)
+            this.setState({
+                newTags: clonedArray
+            })
+        } 
+        
+        else {
+            let clonedArray = this.state.newTags.slice(0)
+            clonedArray.push(event.target.value)
+            this.setState({
+                newTags : clonedArray
+            })
+        }
+
     }
 
     validateField(fieldName, value) {
@@ -105,7 +126,7 @@ export default class Create extends React.Component {
             "fashionDescription": this.state.newCaption,
             "head": {
                 "headDressHairstyle": this.state.newHeadDressHairstyle,
-
+                "headType" : this.state.newHeadType,
                 "headCost": this.state.newHeadCost,
                 "headInstructions": this.state.newHeadInstructions
             },
@@ -130,6 +151,7 @@ export default class Create extends React.Component {
                 "accessoriesInstructions": this.state.newAccessoriesInstructions,
                 "accessoriesPresent": this.state.newAccessoriesPresent
             },
+            "tags" : this.state.newTags
 
         });
         this.setState({
@@ -208,6 +230,60 @@ export default class Create extends React.Component {
                                             onChange={this.updateFormField}
                                         />
 
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Form.Label>Tags</Form.Label>
+                                        <div className="mb-3">
+                                            <Form.Check inline 
+                                            label="Casual"
+                                            name="tags"
+                                            value="Casual"
+                                            checked = {this.state.newTags.includes('Casual')}
+                                            onChange = {this.checkboxTagsChange}
+                                            type='checkbox'/>
+                                            <Form.Check inline 
+                                            label="Formal"
+                                            value = "Formal"
+                                            checked = {this.state.newTags.includes('Formal')}
+                                            onChange = {this.checkboxTagsChange}
+                                            name="tags"
+                                            type='checkbox'/>
+                                            <Form.Check inline 
+                                            label="Beach"
+                                            value="Beach"
+                                            checked = {this.state.newTags.includes('Beach')}
+                                            onChange = {this.checkboxTagsChange}
+                                            name="tags"
+                                            type='checkbox'/>
+                                            <Form.Check inline 
+                                            label="Sports"
+                                            value = "Sports"
+                                            checked = {this.state.newTags.includes('Sports')}
+                                            onChange = {this.checkboxTagsChange}
+                                            name="tags"
+                                            type='checkbox'/>
+                                            <Form.Check inline 
+                                            label="Street"
+                                            value = "street"
+                                            checked = {this.state.newTags.includes('Street')}
+                                            onChange = {this.checkboxTagsChange}
+                                            name="tags"
+                                            type='checkbox'/>
+                                            <Form.Check inline 
+                                            label="Cold Wear"
+                                            value = "Cold Wear"
+                                            checked = {this.state.newTags.includes('Cold Wear')}
+                                            onChange = {this.checkboxTagsChange}
+                                            name="tags"
+                                            type='checkbox'/>
+                                            <Form.Check inline 
+                                            label="Smart Casual"
+                                            value = "Smart Casual"
+                                            checked = {this.state.newTags.includes('Smart Casual')}
+                                            onChange = {this.checkboxTagsChange}
+                                            name="tags"
+                                            type='checkbox'/>
+                                        </div>
                                     </FormGroup>
                                 </Stack>
 
@@ -438,7 +514,7 @@ export default class Create extends React.Component {
                                 </FormGroup>
 
                                 <FormGroup>
-                                    <Form.Label htmlFor="accesoryCost">Cost of Bottom</Form.Label>
+                                    <Form.Label htmlFor="accesoryCost">Cost of Accessory</Form.Label>
                                     <Form.Control
                                         type="number"
                                         id="accessoryCost"

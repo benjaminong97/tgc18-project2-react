@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Form, Container, Button, Row, Card, Col } from 'react-bootstrap';
+import { Form, Container, Button, Row, Card, Col, Badge } from 'react-bootstrap';
 import { Helmet } from 'react-helmet';
 import TopBar from './TopBar';
 import Outfit from './Outfit';
@@ -105,12 +105,14 @@ export default class Search extends React.Component {
                                             <Card.Text>
                                                 Price of outfit: ${(Number(o.top.topCost) + Number(o.bottom.bottomCost) + Number(o.shoes.shoesCost)).toFixed(2)}
                                             </Card.Text>
-    
-                                            <Container>
-                                                <figcaption className="figure-caption dated mb-2">
+                                            <div className = "tagsPos">
+                                                {
+                                                    o.tags.map(t => (<Badge bg="secondary" className="m-1">{t}</Badge>))
+                                                }
+                                                <figcaption className="figure-caption mb-2">
                                                     Added on: {o.dateAdded}
                                                 </figcaption>
-                                            </Container>
+                                            </div>
     
     
                                         </Card.Body>

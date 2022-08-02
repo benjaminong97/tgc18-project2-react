@@ -25,7 +25,7 @@ export default class Listings extends React.Component {
         currentId: "",
     };
 
-    
+
 
 
     setActive = (page) => {
@@ -37,7 +37,7 @@ export default class Listings extends React.Component {
     setOutfit = (page, id) => {
 
         this.setState({
-            'currentId' : id
+            'currentId': id
         })
         this.setActive(page)
     }
@@ -52,13 +52,13 @@ export default class Listings extends React.Component {
         if (this.state.active === "listings") {
             return (
                 <React.Fragment>
-                    <TopBar setActive = {this.setActive}/>
-                    
+                    <TopBar setActive={this.setActive} />
+
 
                     <Container fluid>
-                    <Banner/>
+                        <Banner />
                     </Container>
-                    
+
 
                     <div className="container">
                         <Helmet>
@@ -68,7 +68,7 @@ export default class Listings extends React.Component {
                             {this.state.data.map(o => <React.Fragment key={o._id}>
                                 <Col xs={12} md={6} lg={4}>
 
-                                    <Card className="Card MainList m-3" onClick={() => this.setOutfit("outfit", o._id)} style={{height: "600px"}}>
+                                    <Card className="Card MainList m-3" onClick={() => this.setOutfit("outfit", o._id)} style={{ height: "600px" }}>
                                         <Card.Img variant="top" src={o.outfitImage} style={{ height: "350px", objectFit: "cover" }} />
                                         <Card.Body>
                                             <Card.Title>{o.title}</Card.Title>
@@ -78,20 +78,29 @@ export default class Listings extends React.Component {
                                             <Card.Text>
                                                 Price of outfit: ${(Number(o.top.topCost) + Number(o.bottom.bottomCost) + Number(o.shoes.shoesCost)).toFixed(2)}
                                             </Card.Text>
-                                            
+
+                                            <div className = "tagsPos">
+                                                {
+                                                    o.tags.map(t => (<Badge bg="secondary" className="m-1">{t}</Badge>))
+                                                }
+                                                <figcaption className="figure-caption mb-2">
+                                                    Added on: {o.dateAdded}
+                                                </figcaption>
+                                            </div>
+
+
                                             <Container>
-                                            <figcaption className="figure-caption dated mb-2">
-                                                Added on: {o.dateAdded}
-                                            </figcaption>
+
+                                                
                                             </Container>
-                                            
-                                            
+
+
                                         </Card.Body>
                                         <Card.Body>
-                                        
+
                                         </Card.Body>
                                     </Card>
-                                    
+
                                 </Col>
 
                                 {/* <Button variant="danger" onClick={() => this.deleteEntry(o._id)}>Delete</Button> */}
@@ -109,9 +118,9 @@ export default class Listings extends React.Component {
         } else if (this.state.active === "create") {
             return (
                 <React.Fragment>
-                    <TopBar setActive = {this.setActive}/>
+                    <TopBar setActive={this.setActive} />
                     <Helmet>
-                            <style>{'body {background-color: #FFFFFD'}</style>
+                        <style>{'body {background-color: #FFFFFD'}</style>
                     </Helmet>
                     <Create setActive={this.setActive} />
                 </React.Fragment>
@@ -119,36 +128,36 @@ export default class Listings extends React.Component {
         } else if (this.state.active === "outfit") {
             return (
                 <React.Fragment>
-                    <TopBar setActive = {this.setActive}/>
+                    <TopBar setActive={this.setActive} />
 
-                    <Outfit 
-                    id = {this.state.currentId}
+                    <Outfit
+                        id={this.state.currentId}
                     />
 
                 </React.Fragment>
             )
-        } else if (this.state.active ==="search") {
+        } else if (this.state.active === "search") {
             return (
                 <React.Fragment>
-                    <TopBar 
-                    setActive = {this.setActive} 
-                    setOutfit = {this.setOutfit} 
-                    updateFormField = {this.updateFormField}
+                    <TopBar
+                        setActive={this.setActive}
+                        setOutfit={this.setOutfit}
+                        updateFormField={this.updateFormField}
                     />
 
-                    <Search/>
+                    <Search />
                 </React.Fragment>
             )
         } else if (this.state.active === "myContributions") {
             return (
                 <React.Fragment>
-                    <TopBar 
-                    setActive = {this.setActive} 
-                    setOutfit = {this.setOutfit} 
-                    updateFormField = {this.updateFormField}
+                    <TopBar
+                        setActive={this.setActive}
+                        setOutfit={this.setOutfit}
+                        updateFormField={this.updateFormField}
                     />
 
-                    <MyContributions/>
+                    <MyContributions />
                 </React.Fragment>
             )
         }

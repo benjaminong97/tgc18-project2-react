@@ -8,7 +8,7 @@
 }
 
 .MainList {
-    height: 620px
+    height: 600px
 }
 
 .Card:hover {
@@ -16,6 +16,11 @@
 }
 
 .dated {
+    position: absolute;
+    bottom: 0
+}
+
+.tagsPos {
     position: absolute;
     bottom: 0
 }

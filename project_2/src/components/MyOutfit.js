@@ -32,7 +32,8 @@ export default class Outfit extends React.Component {
         newAccessoriesPresent: "false",
         newAccessoriesName: undefined,
         newAccessoriesCost: undefined,
-        newAccessoriesInstructions: undefined
+        newAccessoriesInstructions: undefined,
+        newTags: []
     }
 
     setActiveTab = (name) => {
@@ -53,8 +54,77 @@ export default class Outfit extends React.Component {
         this.props.setActive('search')
     }
 
+    updateEntry = async (id) => {
+        await axios.put(`${this.url}outfits/edit/${id}`, {
+            "title": this.state.newTitle,
+            
+            "outfitImage": this.state.newOutfitImage,
+            "contributor": this.state.newContributor,
+            "fashionDescription": this.state.newCaption,
+            "head": {
+                "headDressHairstyle": this.state.newHeadDressHairstyle,
+                "headType" : this.state.newHeadType,
+                "headCost": this.state.newHeadCost,
+                "headInstructions": this.state.newHeadInstructions
+            },
+            "top": {
+                "topName": this.state.newTopName,
+                "topCost": this.state.newTopCost,
+                "topInstructions": this.state.newTopInstructions
+            },
+            "bottom": {
+                "bottomName": this.state.newBottomName,
+                "bottomCost": this.state.newBottomCost,
+                "bottomInstructions": this.state.newBottomInstructions
+            },
+            "shoes": {
+                "shoesName": this.state.newShoesName,
+                "shoesCost": this.state.newShoesCost,
+                "shoesInstructions": this.state.newShoesInstructions
+            },
+            "accessories": {
+                "accessoriesName": this.state.newAccessoriesName,
+                "accessoriesCost": this.state.newAccessoriesCost,
+                "accessoriesInstructions": this.state.newAccessoriesInstructions,
+                "accessoriesPresent": this.state.newAccessoriesPresent
+            },
+            "tags" : this.state.newTags
+        })
+        this.props.setActive('search')
+    }
+
     
-    
+    radioHeadChange = (event) => {
+        this.setState({
+            newHeadType: event.target.value
+        })
+    }
+
+    selectAccessoriesChange = (event) => {
+        this.setState({
+            newAccessoriesPresent: event.target.value
+        })
+    }
+
+    checkboxTagsChange = (event) => {
+        if (this.state.newTags.includes(event.target.value)) {
+            let tagIndex = this.state.newTags.indexOf(event.target.value)
+            let clonedArray = this.state.newTags.slice(0)
+            clonedArray.splice(tagIndex,1)
+            this.setState({
+                newTags: clonedArray
+            })
+        } 
+        
+        else {
+            let clonedArray = this.state.newTags.slice(0)
+            clonedArray.push(event.target.value)
+            this.setState({
+                newTags : clonedArray
+            })
+        }
+
+    }
 
 
 
@@ -777,7 +847,7 @@ export default class Outfit extends React.Component {
                                     </Container>
                                 )}
                                 <Container>
-                                <Button variant="warning" className="m-3">
+                                <Button variant="warning" className="m-3" onClick={() => this.setState({active: "update"})}>
                                     Update Outfit
                                 </Button>
                                 <Button variant="danger" className="m-3" onClick={() => this.setState({active:"delete"})}>
@@ -849,6 +919,60 @@ export default class Outfit extends React.Component {
                                             onChange={this.updateFormField}
                                         />
 
+                                    </FormGroup>
+                                    <FormGroup>
+                                        <Form.Label>Tags</Form.Label>
+                                        <div className="mb-3">
+                                            <Form.Check inline 
+                                            label="Casual"
+                                            name="tags"
+                                            value="Casual"
+                                            checked = {this.state.newTags.includes('Casual')}
+                                            onChange = {this.checkboxTagsChange}
+                                            type='checkbox'/>
+                                            <Form.Check inline 
+                                            label="Formal"
+                                            value = "Formal"
+                                            checked = {this.state.newTags.includes('Formal')}
+                                            onChange = {this.checkboxTagsChange}
+                                            name="tags"
+                                            type='checkbox'/>
+                                            <Form.Check inline 
+                                            label="Beach"
+                                            value="Beach"
+                                            checked = {this.state.newTags.includes('Beach')}
+                                            onChange = {this.checkboxTagsChange}
+                                            name="tags"
+                                            type='checkbox'/>
+                                            <Form.Check inline 
+                                            label="Sports"
+                                            value = "Sports"
+                                            checked = {this.state.newTags.includes('Sports')}
+                                            onChange = {this.checkboxTagsChange}
+                                            name="tags"
+                                            type='checkbox'/>
+                                            <Form.Check inline 
+                                            label="Street"
+                                            value = "Street"
+                                            checked = {this.state.newTags.includes('Street')}
+                                            onChange = {this.checkboxTagsChange}
+                                            name="tags"
+                                            type='checkbox'/>
+                                            <Form.Check inline 
+                                            label="Cold Wear"
+                                            value = "Cold Wear"
+                                            checked = {this.state.newTags.includes('Cold Wear')}
+                                            onChange = {this.checkboxTagsChange}
+                                            name="tags"
+                                            type='checkbox'/>
+                                            <Form.Check inline 
+                                            label="Smart Casual"
+                                            value = "Smart Casual"
+                                            checked = {this.state.newTags.includes('Smart Casual')}
+                                            onChange = {this.checkboxTagsChange}
+                                            name="tags"
+                                            type='checkbox'/>
+                                        </div>
                                     </FormGroup>
                                 </Stack>
 
@@ -1106,8 +1230,8 @@ export default class Outfit extends React.Component {
                             </Accordion.Body>
                         </Accordion.Item>
                     </Accordion>
-                    <Button variant="secondary" className="btn btn-primary mt-3" onClick={this.create}>
-                        Create
+                    <Button variant="secondary" className="btn btn-primary my-3" onClick={() => this.updateEntry(this.state.id)}>
+                        Update
                     </Button>
                 </Container>
 
@@ -1122,14 +1246,32 @@ export default class Outfit extends React.Component {
 
 
     async componentDidMount() {
-        console.log(this.state.id)
+        
         let response = await axios.get(this.url + "outfit?id=" + this.state.id)
         this.setState({
             data: response.data,
             newTitle: response.data.title,
             newOutfitImage : response.data.outfitImage,
             newCaption: response.data.fashionDescription,
-            newHeadDressHairstyle : response.data.head.headDressHairstyle
+            newHeadDressHairstyle : response.data.head.headDressHairstyle,
+            newContributor : response.data.contributor,
+            newTopName : response.data.top.topName,
+            newTopCost: response.data.top.topCost,
+            newTopInstructions: response.data.top.topInstructions,
+            newBottomName : response.data.bottom.bottomName,
+            newBottomCost: response.data.bottom.bottomCost,
+            newBottomInstructions : response.data.bottomInstructions,
+            newHeadCost : response.data.head.headCost,
+            newHeadInstructions: response.data.head.headInstructions,
+            newHeadType: response.data.head.headType,
+            newShoesName: response.data.shoes.shoesName,
+            newShoesCost: response.data.shoes.shoesCost,
+            newShoesInstructions: response.data.shoes.shoesInstructions,
+            newAccessoriesName: response.data.accessories.accessoriesName,
+            newAccessoriesCost: response.data.accessories.accessoriesCost,
+            newAccessoriesInstructions: response.data.accessories.accessoriesInstructions,
+            newTags : response.data.tags
+
         })
     }
 }
