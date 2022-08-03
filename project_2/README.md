@@ -1,10 +1,10 @@
 # Moiroi
 
-![Responsive website](https://github.com/jarednjk/dog-adoption-tgc18-react/blob/main/src/img_readme/responsive_website.png)
+![Responsive website](https://github.com/benjaminong97/tgc18-project2-react/blob/main/project_2/public/mockup.PNG)
 
-The live demo of the React frontend web application can be accessed [here](https://adogpt.netlify.app/).
+The live demo of the React frontend web application can be accessed [here](https://moiroi.netlify.app/).
 
-The backend API implementation can be accessed [here](https://github.com/jarednjk/dog-adoption-tgc18-express).
+The backend API implementation can be accessed [here](https://github.com/benjaminong97/tgc18-project2-express).
 
 ## Project Summary
 
