@@ -1,4 +1,4 @@
-# Adogpt
+# Moiroi
 
 ![Responsive website](https://github.com/jarednjk/dog-adoption-tgc18-react/blob/main/src/img_readme/responsive_website.png)
 
