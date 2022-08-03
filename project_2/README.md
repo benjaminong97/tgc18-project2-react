@@ -1,70 +1,124 @@
-# Getting Started with Create React App
+# Adogpt
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![Responsive website](https://github.com/jarednjk/dog-adoption-tgc18-react/blob/main/src/img_readme/responsive_website.png)
 
-## Available Scripts
+The live demo of the React frontend web application can be accessed [here](https://adogpt.netlify.app/).
 
-In the project directory, you can run:
+The backend API implementation can be accessed [here](https://github.com/jarednjk/dog-adoption-tgc18-express).
 
-### `npm start`
+## Project Summary
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Project Context
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Moiroi is a mobile responsive web application that allows users to find and share outfits by implementing CRUD (Create, Read, Update, Delete).
 
-### `npm test`
+Anyone can make use of the platform by sharing their OOTDs (outfits of the day) or their favourite outfits. People who are stuck trying to find an outfit to wear for their next date, or just to go out can find outfits for every occasion. Moiroi has a search functionality which allows users to filter and search for outfits by name, price, categories, and tags. 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+It is developed using the MERN (MongoDB, ExpressJS, React, NodeJS) stack.
 
-### `npm run build`
+### Target Audience
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+It is targeted at people who wish to share their favourite outfits or people who wish to get an idea of what to wear next. 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Justification for the App
 
-### `npm run eject`
+Currently, people typically share their outfits on various platforms of social media such as instagram or facebook. However, the issue in using a more general purpose social media is that their search functionality is more limited. For example, a student on a budget may wish to find entire outfits for less than a certain price. Such a user would be aided greatly by Moiroi due to its search functionality. In addition, Moiroi provides most relevant fields for users to create an outfit, a user can easily identify the components making up the entire outfit within the app.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## UX / UI
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Strategy
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+#### Organisation Goal
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+This web application serves as a platform to connect users seeking fashion ideas and ideas with people or influencers who wish to share their style. 
 
-## Learn More
+#### User Goals
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+| User Story | Acceptance Criteria |
+| ----------- | ----------- |
+| Someone wishes to share his outfit | He wants to be able to create an outfit on the web application |
+| An outfit owner has entered the wrong details for his outfit | He wants to be able to edit the outfit listing so that the information is up-to-date and accurate |
+| Someone wishes to find an outfit appropriate for a certain occasion (such as a beach day) or an outfit within a certain budget | Search bar to filter outfit listing based on tags or price |
+| An outfit owner no longer wishes to share his outfit | He wants to be able to delete the outfit listing |
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Scope
 
-### Code Splitting
+#### Functional Requirements
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Browse all the outfit listings
+- Search and filter outfit listings based on certain criterias
+- View details of outfit listing
+- Create outfit listing
+- Edit outfit listing
+- Delete outfit listing
 
-### Analyzing the Bundle Size
+#### Non-functional Requirements
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Performance criteria
+- Mobile responsiveness
 
-### Making a Progressive Web App
+### Structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+All pages of the web application can be accessed via the navigation bar. The flowchart below shows how different features can be accessed:
 
-### Advanced Configuration
+![Web app structure](https://github.com/jarednjk/dog-adoption-tgc18-react/blob/main/src/img_readme/app_structure.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Surface
 
-### Deployment
+**Colours**: Light beige is used as background to keep the website aesthetic clean.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+**Fonts**: Josefin Sans is used as it gives off an artsy and clean aesthetic.
 
-### `npm run build` fails to minify
+## Features
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+| Feature | Description |
+| ----------- | ----------- |
+| Dynamic search and filter | The results are displayed instantaneously as the users search and filter dog listings by different criterias. |
+| View full details of dog listings | User can click on each card and it will expand out to a modal that displays all the details of the dog. |
+| Create new dog listing | A form with validation to enter required information to create a dog listing in the database |
+| Edit dog listing | A form with validation to edit changes so that the information is up-to-date and accurate   |
+| Delete dog listing | Allows current dog owners to delete their dog listings from the database after their dogs are adopted. |
+
+## Limitations & Future Implementations
+
+| Limitation | Future Implementation |
+| ----------- | ----------- |
+| Users are unable to add their own tags for filtering | Update creation and update pages to allow tags to be added to the database and retrieved when users wish to search for them |
+| Other users can edit or delete any outfit listing | Implement user authentication such that only the creator of the outfit can edit and delete his own listing |
+| Browse page will become longer as more listings are created | Implement pagination to limit the number of outfit listings per page |
+
+## Technologies Used
+
+### Frontend Framework
+
+1. HTML5
+2. CSS3
+3. Javascript
+4. [React](https://reactjs.org/) for frontend framework
+5. [React Bootstrap](https://react-bootstrap.github.io/) for styling website
+6. [Boostrap 5](https://getbootstrap.com/) for icons
+7. [Axios](https://github.com/axios/axios) to communicate with ExpressJS server for CRUD (Create, Read, Update, Delete) in database
+
+
+### Backend Framework
+
+1. [ExpressJS](https://expressjs.com/) & [NodeJS](https://nodejs.org/en/) - minimalist web application framework to help manage servers and routes
+2. [MongoDB & MongoDB Atlas](https://www.mongodb.com/) - manage document-oriented information, store or retrieve information
+3. [Heroku](https://id.heroku.com/login) - cloud platform server for API
+4. [Yup](https://github.com/jquense/yup) - library for validation
+
+## Testing
+
+Detailed test cases for the web application can be found [here](https://github.com/jarednjk/dog-adoption-tgc18-react/blob/main/src/img_readme/adogpt_test_case.pdf).
+
+## Deployment
+
+The web application is hosted using [Netlify](https://www.netlify.com/), deployed directly from the main branch of this GitHub repository. For the detailed deployment steps, you may refer [here](https://www.netlify.com/blog/2016/09/29/a-step-by-step-guide-deploying-on-netlify/).
+
+## Credits & Acknowledgement
+
+- [Canva](https://www.canva.com/) for the brand logo
+- [Google Fonts](https://fonts.google.com/) for the font
+- [StackOverflow](https://stackoverflow.com/) for RegEx in form validation
+- [CreateMockup.com](https://www.createmockup.com/generate/) to generate responsive website mockup for README file
