@@ -60,9 +60,7 @@ This web application serves as a platform to connect users seeking fashion ideas
 
 ### Structure
 
-All pages of the web application can be accessed via the navigation bar. The flowchart below shows how different features can be accessed:
-
-![Web app structure](https://github.com/jarednjk/dog-adoption-tgc18-react/blob/main/src/img_readme/app_structure.png)
+All main pages of the web application can be accessed via the navigation bar. Outfit cards can be clicked to reveal more details. Update and Delete functions are accessed via the "My Contributions" page. 
 
 ### Surface
 
@@ -110,7 +108,7 @@ All pages of the web application can be accessed via the navigation bar. The flo
 
 ## Testing
 
-Detailed test cases for the web application can be found [here](https://github.com/jarednjk/dog-adoption-tgc18-react/blob/main/src/img_readme/adogpt_test_case.pdf).
+Detailed test cases for the web application can be found [here](<url>).
 
 ## Deployment
 
