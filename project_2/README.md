@@ -31,7 +31,7 @@ Currently, people typically share their outfits on various platforms of social m
 
 #### Organisation Goal
 
-This web application serves as a platform to connect users seeking fashion ideas and ideas with people or influencers who wish to share their style. 
+This web application serves as a platform to connect users seeking fashion ideas with people or influencers who wish to share their style. 
 
 #### User Goals
 
